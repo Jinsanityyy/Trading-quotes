@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trading Quotes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        .quote {
+            font-size: 1.3em;
+            font-style: italic;
+            margin: 20px auto;
+            max-width: 80%;
+        }
+        .author {
+            font-size: 1.1em;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: gray;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+  
+
+    <div class="quote" id="quoteText">"Loading quote..."</div>
+    <div class="author" id="quoteAuthor">- Loading...</div>
+
+    <button onclick="generateQuote()">🎲 New Quote</button>
+
+    <script>
+        const quotes = [
+            { text: "The goal of a successful trader is to make the best trades. Money is secondary.", author: "Alexander Elder" },
+            { text: "Amateurs think about how much money they can make. Professionals think about how much money they could lose.", author: "Jack Schwager" },
+            { text: "It’s not whether you’re right or wrong that’s important, but how much money you make when you’re right and how much you lose when you’re wrong.", author: "George Soros" },
+            { text: "Don’t focus on making money; focus on protecting what you have.", author: "Paul Tudor Jones" },
+            { text: "Cut your losses short and let your winners run.", author: "Jesse Livermore" },
+            { text: "The stock market is a device for transferring money from the impatient to the patient.", author: "Warren Buffett" },
+            { text: "Markets can remain irrational longer than you can remain solvent.", author: "John Maynard Keynes" },
+            { text: "If you cannot control your emotions, you cannot control your money.", author: "Warren Buffett" },
+            { text: "The four most dangerous words in investing are: ‘This time it’s different.’", author: "Sir John Templeton" },
+            { text: "Trade what you see, not what you think.", author: "Unknown" },
+            { text: "The best traders have no ego. You have to swallow your pride and get out of the losses quickly.", author: "Tom Baldwin" },
+            { text: "The big money is not in the buying or selling, but in the waiting.", author: "Charlie Munger" },
+            { text: "Time is your friend; impulse is your enemy.", author: "John Bogle" },
+            { text: "A trader who wants to be right all the time will end up broke.", author: "Unknown" }
+        ];
+
+        function generateQuote() {
+            let randomIndex = Math.floor(Math.random() * quotes.length);
+            document.getElementById("quoteText").innerText = `"${quotes[randomIndex].text}"`;
+            document.getElementById("quoteAuthor").innerText = `- ${quotes[randomIndex].author}`;
+        }
+
+        setInterval(generateQuote, 5000); // Auto-change every 5 seconds
+        generateQuote(); // Initial quote on load
+    </script>
+
+</body>
+</html>
