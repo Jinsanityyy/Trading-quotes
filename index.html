@@ -229,10 +229,11 @@
       fill: none;
     }
 
-    /* clients bar */
+    /* tools bar */
     .clients-bar {
       border-top: 1px solid var(--border);
-      padding: 48px 40px;
+      border-bottom: 1px solid var(--border);
+      padding: 36px 40px;
     }
 
     .clients-inner {
@@ -240,31 +241,43 @@
       margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: 56px;
+      gap: 0;
       flex-wrap: wrap;
     }
 
     .clients-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.18em;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--cream-dim);
+      color: rgba(138, 128, 112, 0.4);
       flex-shrink: 0;
+      padding-right: 40px;
+      border-right: 1px solid var(--border);
+      margin-right: 40px;
+      white-space: nowrap;
     }
 
     .clients-logos {
       display: flex;
-      gap: 48px;
+      gap: 0;
       align-items: center;
       flex-wrap: wrap;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .client-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      color: rgba(138, 128, 112, 0.5);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .client-logo:hover {
       color: var(--cream-dim);
-      letter-spacing: 0.06em;
-      opacity: 0.55;
     }
 
     /* ── SERVICES ── */
@@ -678,14 +691,14 @@
   <!-- TOOLS BAR -->
   <div class="clients-bar">
     <div class="clients-inner">
-      <span class="clients-label">Systems built with</span>
+      <span class="clients-label">Tools &amp; stack</span>
       <div class="clients-logos">
-        <span class="client-logo">Make</span>
-        <span class="client-logo">Go&nbsp;High&nbsp;Level</span>
-        <span class="client-logo">HubSpot</span>
-        <span class="client-logo">Clay</span>
-        <span class="client-logo">Zapier</span>
         <span class="client-logo">n8n</span>
+        <span class="client-logo">Zapier</span>
+        <span class="client-logo">GoHighLevel</span>
+        <span class="client-logo">HubSpot</span>
+        <span class="client-logo">OpenAI</span>
+        <span class="client-logo">Airtable</span>
       </div>
     </div>
   </div>
