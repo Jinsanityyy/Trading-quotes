@@ -147,32 +147,31 @@
 
     .hero-portrait {
       width: 100%;
-      max-width: 680px;
+      max-width: 760px;
       aspect-ratio: 3 / 4;
       object-fit: cover;
       object-position: top center;
       display: block;
-      margin: 0 auto 44px;
-      filter: grayscale(100%) contrast(1.06) brightness(0.93);
-      box-shadow: 0 40px 120px rgba(0, 0, 0, 0.45);
+      margin: 0 auto 40px;
+      filter: grayscale(100%) contrast(1.06) brightness(0.92);
       -webkit-mask-image: linear-gradient(to bottom,
         transparent 0%,
-        black 5%,
-        black 54%,
+        black 4%,
+        black 62%,
         transparent 100%);
       mask-image: linear-gradient(to bottom,
         transparent 0%,
-        black 5%,
-        black 54%,
+        black 4%,
+        black 62%,
         transparent 100%);
     }
 
     /* portrait placeholder (shown when no image) */
     .hero-portrait-placeholder {
       width: 100%;
-      max-width: 600px;
+      max-width: 760px;
       aspect-ratio: 3 / 4;
-      margin: 0 auto 56px;
+      margin: 0 auto 40px;
       background: #1a1a1a;
       display: flex;
       align-items: center;
@@ -187,12 +186,12 @@
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-size: clamp(1.9rem, 4.8vw, 3.8rem);
       font-weight: 400;
-      line-height: 1.05;
+      line-height: 1.08;
       letter-spacing: -0.01em;
       color: var(--white);
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
 
     .hero-title em {
@@ -204,7 +203,7 @@
       font-size: 0.95rem;
       color: var(--cream-dim);
       max-width: 480px;
-      margin: 0 auto 36px;
+      margin: 0 auto 28px;
       line-height: 1.75;
     }
 
@@ -237,6 +236,21 @@
       height: 16px;
       stroke: var(--cream);
       fill: none;
+    }
+
+    .hero-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hero-cta-note {
+      font-size: 0.68rem;
+      color: rgba(138, 128, 112, 0.38);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      max-width: 340px;
     }
 
     /* hero mini tools strip */
@@ -696,7 +710,7 @@
     }
 
     @media (max-width: 560px) {
-      .hero-portrait, .hero-portrait-placeholder { max-width: min(92vw, 440px); aspect-ratio: 3 / 4; }
+      .hero-portrait, .hero-portrait-placeholder { max-width: min(94vw, 480px); aspect-ratio: 3 / 4; }
       .tools-categories { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr; }
       .process-step { border-right: none; }
@@ -736,16 +750,19 @@
     <div class="hero-portrait-placeholder" style="display:none;">Portrait</div>
 
     <div class="hero-content">
-      <h1 class="hero-title">Automation &amp;<br>Systems<br><em>Specialist.</em></h1>
+      <h1 class="hero-title">Automate Your Business<br><em>Without Hiring<br>More Staff</em></h1>
       <p class="hero-sub">
-        I build automation systems that cut manual work and keep your business running — 24/7.
+        I build automation systems that capture leads, handle follow-ups, and streamline operations — so you can scale without manual work.
       </p>
-      <a href="#cta" class="hero-cta">
-        <span class="hero-cta-icon">
-          <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </span>
-        Book a Free Automation Audit
-      </a>
+      <div class="hero-cta-wrap">
+        <a href="#cta" class="hero-cta">
+          <span class="hero-cta-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </span>
+          Book a Free Automation Audit
+        </a>
+        <p class="hero-cta-note">I'll review your workflow and show you what to automate first.</p>
+      </div>
 
       <div class="hero-tools">
         <span class="hero-tools-label">Built with</span>
