@@ -1,84 +1,953 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trading Quotes</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 50px;
-        }
-        h1 {
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-        .quote {
-            font-size: 1.3em;
-            font-style: italic;
-            margin: 20px auto;
-            max-width: 80%;
-        }
-        .author {
-            font-size: 1.1em;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1em;
-            background-color: white;
-            color: black;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        button:hover {
-            background-color: gray;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arik — Automation Specialist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0c0c0c;
+      --bg-card:   #141414;
+      --border:    rgba(220, 210, 190, 0.1);
+      --cream:     #ddd5c0;
+      --cream-dim: #8a8070;
+      --white:     #f5f0e8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      background: linear-gradient(to bottom, rgba(12,12,12,0.95) 0%, transparent 100%);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--cream);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* mobile menu */
+    .nav-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+    }
+
+    .nav-menu.open { display: flex; }
+
+    .nav-menu a {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity 0.2s;
+    }
+
+    .nav-menu a:hover { opacity: 0.55; }
+
+    .nav-menu-close {
+      position: absolute;
+      top: 28px; right: 40px;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      color: var(--cream);
+      cursor: pointer;
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 120px 40px; }
+
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 28px;
+      height: 1px;
+      background: var(--cream-dim);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 40px 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-portrait {
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      margin: 0 auto 64px;
+      filter: grayscale(100%) contrast(1.05);
+    }
+
+    /* portrait placeholder (shown when no image) */
+    .hero-portrait-placeholder {
+      width: 100%;
+      max-width: 460px;
+      aspect-ratio: 3 / 4;
+      margin: 0 auto 64px;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cream-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .hero-content { max-width: 720px; }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--cream);
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--cream-dim);
+      max-width: 480px;
+      margin: 0 auto 52px;
+      line-height: 1.75;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta:hover { opacity: 0.6; }
+
+    .hero-cta-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-cta-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--cream);
+      fill: none;
+    }
+
+    /* clients bar */
+    .clients-bar {
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+    }
+
+    .clients-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 56px;
+      flex-wrap: wrap;
+    }
+
+    .clients-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      flex-shrink: 0;
+    }
+
+    .clients-logos {
+      display: flex;
+      gap: 48px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .client-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+      letter-spacing: 0.06em;
+      opacity: 0.55;
+    }
+
+    /* ── SERVICES ── */
+    #services { border-top: 1px solid var(--border); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      padding: 48px 40px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .service-card:hover { background: #1a1a1a; }
+
+    .service-num {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--cream-dim);
+      margin-bottom: 40px;
+      display: block;
+    }
+
+    .service-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 16px;
+      line-height: 1.25;
+    }
+
+    .service-desc {
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+      line-height: 1.75;
+    }
+
+    /* ── WORK ── */
+    #work { border-top: 1px solid var(--border); }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .work-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 48px 44px;
+      cursor: default;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-card:hover { background: #191919; }
+
+    .work-card-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 20px;
+    }
+
+    .work-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    .work-card-desc {
+      font-size: 0.85rem;
+      color: var(--cream-dim);
+      line-height: 1.75;
+      margin-bottom: 36px;
+    }
+
+    .work-stat {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      font-weight: 400;
+      color: var(--cream);
+    }
+
+    .work-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-top: 4px;
+    }
+
+    .work-card-full {
+      grid-column: 1 / -1;
+    }
+
+    /* ── TOOLS ── */
+    #tools { border-top: 1px solid var(--border); }
+
+    .tools-intro {
+      max-width: 560px;
+      margin-bottom: 80px;
+    }
+
+    .tools-intro h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+
+    .tools-intro p {
+      font-size: 0.9rem;
+      color: var(--cream-dim);
+      line-height: 1.75;
+    }
+
+    .tools-categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .tool-category {
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+    }
+
+    .tool-category-name {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 28px;
+    }
+
+    .tool-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .tool-list li {
+      font-size: 0.9rem;
+      color: var(--cream);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tool-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--cream-dim);
+      flex-shrink: 0;
+    }
+
+    /* ── PROCESS ── */
+    #process { border-top: 1px solid var(--border); }
+
+    .process-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+      margin-bottom: 80px;
+    }
+
+    .process-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.15;
+    }
+
+    .process-header p {
+      font-size: 0.88rem;
+      color: var(--cream-dim);
+      line-height: 1.8;
+    }
+
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+
+    .process-step {
+      padding: 44px 36px;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .process-step:last-child { border-right: none; }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 400;
+      color: rgba(220, 210, 190, 0.08);
+      line-height: 1;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .step-title {
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+
+    .step-desc {
+      font-size: 0.82rem;
+      color: var(--cream-dim);
+      line-height: 1.75;
+    }
+
+    /* ── CTA ── */
+    #cta {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 140px 40px;
+    }
+
+    .cta-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      margin-bottom: 40px;
+    }
+
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .cta-title em { font-style: italic; color: var(--cream); }
+
+    .cta-sub {
+      font-size: 0.9rem;
+      color: var(--cream-dim);
+      margin-bottom: 64px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      border: 1px solid var(--cream);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 20px 52px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .cta-btn:hover {
+      background: var(--cream);
+      color: var(--bg);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 48px 40px;
+    }
+
+    .footer-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--cream);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: rgba(138, 128, 112, 0.45);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      section { padding: 90px 24px; }
+      .clients-bar { padding: 40px 24px; }
+      #hero { padding: 0 24px 80px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr; }
+      .work-card-full { grid-column: unset; }
+      .tools-categories { grid-template-columns: 1fr 1fr; }
+      .process-header { grid-template-columns: 1fr; gap: 24px; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-step { border-bottom: 1px solid var(--border); }
+      .process-step:nth-child(even) { border-right: none; }
+      footer { padding: 40px 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .nav-menu-close { right: 24px; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-portrait, .hero-portrait-placeholder { max-width: 320px; }
+      .tools-categories { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+      .process-step { border-right: none; }
+      .clients-inner { gap: 28px; }
+      .clients-logos { gap: 28px; }
+    }
+  </style>
 </head>
 <body>
 
-  
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">arik.</a>
+    <button class="nav-toggle" aria-label="Open menu" onclick="document.getElementById('navMenu').classList.add('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-    <div class="quote" id="quoteText">"Loading quote..."</div>
-    <div class="author" id="quoteAuthor">- Loading...</div>
+  <div class="nav-menu" id="navMenu">
+    <button class="nav-menu-close" aria-label="Close menu" onclick="document.getElementById('navMenu').classList.remove('open')">&#215;</button>
+    <a href="#services" onclick="document.getElementById('navMenu').classList.remove('open')">Services</a>
+    <a href="#work"     onclick="document.getElementById('navMenu').classList.remove('open')">Work</a>
+    <a href="#tools"    onclick="document.getElementById('navMenu').classList.remove('open')">Stack</a>
+    <a href="#process"  onclick="document.getElementById('navMenu').classList.remove('open')">Process</a>
+    <a href="#cta"      onclick="document.getElementById('navMenu').classList.remove('open')">Contact</a>
+  </div>
 
-    <button onclick="generateQuote()">🎲 New Quote</button>
+  <!-- HERO -->
+  <section id="hero">
+    <!-- Replace portrait.jpg with your actual image path -->
+    <img
+      src="images/portrait.jpg"
+      alt="Arik portrait"
+      class="hero-portrait"
+      onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+    />
+    <div class="hero-portrait-placeholder" style="display:none;">Portrait</div>
 
-    <script>
-        const quotes = [
-            { text: "The goal of a successful trader is to make the best trades. Money is secondary.", author: "Alexander Elder" },
-            { text: "Amateurs think about how much money they can make. Professionals think about how much money they could lose.", author: "Jack Schwager" },
-            { text: "It’s not whether you’re right or wrong that’s important, but how much money you make when you’re right and how much you lose when you’re wrong.", author: "George Soros" },
-            { text: "Don’t focus on making money; focus on protecting what you have.", author: "Paul Tudor Jones" },
-            { text: "Cut your losses short and let your winners run.", author: "Jesse Livermore" },
-            { text: "The stock market is a device for transferring money from the impatient to the patient.", author: "Warren Buffett" },
-            { text: "Markets can remain irrational longer than you can remain solvent.", author: "John Maynard Keynes" },
-            { text: "If you cannot control your emotions, you cannot control your money.", author: "Warren Buffett" },
-            { text: "The four most dangerous words in investing are: ‘This time it’s different.’", author: "Sir John Templeton" },
-            { text: "Trade what you see, not what you think.", author: "Unknown" },
-            { text: "The best traders have no ego. You have to swallow your pride and get out of the losses quickly.", author: "Tom Baldwin" },
-            { text: "The big money is not in the buying or selling, but in the waiting.", author: "Charlie Munger" },
-            { text: "Time is your friend; impulse is your enemy.", author: "John Bogle" },
-            { text: "A trader who wants to be right all the time will end up broke.", author: "Unknown" }
-        ];
+    <div class="hero-content">
+      <h1 class="hero-title">Automation<br><em>&amp; Systems</em><br>Specialist</h1>
+      <p class="hero-sub">
+        I build intelligent automation systems that eliminate manual work,
+        accelerate growth, and let your business run at full capacity — around the clock.
+      </p>
+      <a href="#services" class="hero-cta">
+        <span class="hero-cta-icon">
+          <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        </span>
+        My Services
+      </a>
+    </div>
+  </section>
 
-        function generateQuote() {
-            let randomIndex = Math.floor(Math.random() * quotes.length);
-            document.getElementById("quoteText").innerText = `"${quotes[randomIndex].text}"`;
-            document.getElementById("quoteAuthor").innerText = `- ${quotes[randomIndex].author}`;
-        }
+  <!-- CLIENTS -->
+  <div class="clients-bar">
+    <div class="clients-inner">
+      <span class="clients-label">Trusted by</span>
+      <div class="clients-logos">
+        <span class="client-logo">Nexus&nbsp;Media</span>
+        <span class="client-logo">Orvyn&nbsp;Group</span>
+        <span class="client-logo">Caldera&nbsp;Labs</span>
+        <span class="client-logo">Prism&nbsp;Agency</span>
+        <span class="client-logo">Vault&nbsp;Finance</span>
+      </div>
+    </div>
+  </div>
 
-        setInterval(generateQuote, 5000); // Auto-change every 5 seconds
-        generateQuote(); // Initial quote on load
-    </script>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <p class="section-label">What I do</p>
+      <div class="services-grid">
+
+        <div class="service-card">
+          <span class="service-num">01</span>
+          <h3 class="service-title">CRM Automation</h3>
+          <p class="service-desc">
+            Full CRM setup and automation — pipeline management, lead scoring,
+            contact segmentation, and automatic status updates so no deal falls
+            through the cracks.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-num">02</span>
+          <h3 class="service-title">Lead Generation<br>Systems</h3>
+          <p class="service-desc">
+            End-to-end outbound and inbound lead generation workflows.
+            Automated prospecting, enrichment, and first-touch sequences
+            that deliver qualified leads on autopilot.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-num">03</span>
+          <h3 class="service-title">AI-Powered<br>Follow-ups</h3>
+          <p class="service-desc">
+            Intelligent follow-up sequences using AI to personalise messaging
+            at scale — email, SMS, and voice — timed to prospect behaviour
+            for maximum conversion.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-num">04</span>
+          <h3 class="service-title">Workflow<br>Architecture</h3>
+          <p class="service-desc">
+            Custom multi-tool workflows connecting your entire tech stack.
+            Data flows automatically between apps — no manual exports,
+            no duplicate entry, no gaps.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-num">05</span>
+          <h3 class="service-title">Business Process<br>Optimisation</h3>
+          <p class="service-desc">
+            Audit, redesign, and automate core business processes — from
+            onboarding to reporting — so your team focuses on high-value
+            work, not repetitive tasks.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <span class="service-num">06</span>
+          <h3 class="service-title">Reporting &amp;<br>Dashboards</h3>
+          <p class="service-desc">
+            Automated data aggregation and live reporting dashboards.
+            Real-time visibility into pipeline health, campaign performance,
+            and operational KPIs — always up to date.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="container">
+      <p class="section-label">Selected work</p>
+      <div class="work-grid">
+
+        <div class="work-card">
+          <p class="work-card-tag">CRM · Lead Gen</p>
+          <h3 class="work-card-title">Full-Funnel Automation for a B2B SaaS Firm</h3>
+          <p class="work-card-desc">
+            Rebuilt the entire sales pipeline in HubSpot with automated lead scoring,
+            enrichment via Clay, and AI-personalised outbound sequences through
+            Instantly. New leads move from first touch to booked meeting with zero
+            manual handling.
+          </p>
+          <div class="work-stat">340%</div>
+          <p class="work-stat-label">Increase in qualified meetings booked</p>
+        </div>
+
+        <div class="work-card">
+          <p class="work-card-tag">Workflow · Operations</p>
+          <h3 class="work-card-title">Ops Automation for a D2C E-commerce Brand</h3>
+          <p class="work-card-desc">
+            Connected Shopify, Klaviyo, Gorgias, and a custom 3PL integration via
+            Make. Automated post-purchase flows, support ticket routing, and weekly
+            reporting — saving 30+ hours of manual work per week.
+          </p>
+          <div class="work-stat">30h</div>
+          <p class="work-stat-label">Weekly hours reclaimed per team</p>
+        </div>
+
+        <div class="work-card">
+          <p class="work-card-tag">AI Follow-ups · CRM</p>
+          <h3 class="work-card-title">AI Follow-up Engine for a Real Estate Agency</h3>
+          <p class="work-card-desc">
+            Built an AI-driven follow-up system in Go High Level that monitors lead
+            engagement and sends hyper-personalised SMS and email follow-ups triggered
+            by behaviour. Close rate improved significantly in under 60 days.
+          </p>
+          <div class="work-stat">2.1×</div>
+          <p class="work-stat-label">Improvement in close rate</p>
+        </div>
+
+        <div class="work-card">
+          <p class="work-card-tag">Reporting · Analytics</p>
+          <h3 class="work-card-title">Live Revenue Dashboard for a Marketing Agency</h3>
+          <p class="work-card-desc">
+            Automated data pipelines pulling from 6 ad platforms, a CRM, and
+            a billing tool into a unified Looker Studio dashboard. Leadership
+            now sees real-time P&amp;L and campaign ROI without waiting for
+            weekly reports.
+          </p>
+          <div class="work-stat">6→1</div>
+          <p class="work-stat-label">Platforms consolidated into one view</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="container">
+      <p class="section-label">Stack &amp; tools</p>
+      <div class="tools-intro">
+        <h2>The right tool<br><em style="font-family:'Playfair Display',serif; font-style:italic;">for every system.</em></h2>
+        <p>
+          I work across the leading automation and CRM platforms, choosing the right
+          combination for each client's stack — not a one-size-fits-all approach.
+        </p>
+      </div>
+      <div class="tools-categories">
+
+        <div class="tool-category">
+          <p class="tool-category-name">Automation</p>
+          <ul class="tool-list">
+            <li>Make (Integromat)</li>
+            <li>Zapier</li>
+            <li>n8n</li>
+            <li>Activepieces</li>
+          </ul>
+        </div>
+
+        <div class="tool-category">
+          <p class="tool-category-name">CRM &amp; Sales</p>
+          <ul class="tool-list">
+            <li>Go High Level</li>
+            <li>HubSpot</li>
+            <li>Pipedrive</li>
+            <li>Close CRM</li>
+          </ul>
+        </div>
+
+        <div class="tool-category">
+          <p class="tool-category-name">AI &amp; Outreach</p>
+          <ul class="tool-list">
+            <li>Clay</li>
+            <li>Instantly</li>
+            <li>Smartlead</li>
+            <li>OpenAI API</li>
+          </ul>
+        </div>
+
+        <div class="tool-category">
+          <p class="tool-category-name">Data &amp; Reporting</p>
+          <ul class="tool-list">
+            <li>Looker Studio</li>
+            <li>Airtable</li>
+            <li>Notion</li>
+            <li>Google Sheets</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section id="process">
+    <div class="container">
+      <p class="section-label">How it works</p>
+      <div class="process-header">
+        <h2>A clear process.<br><em style="font-family:'Playfair Display',serif; font-style:italic;">No surprises.</em></h2>
+        <p>
+          Every engagement follows the same four-phase approach — from understanding
+          your current state to a live system running in the background, doing the work
+          your team shouldn't have to.
+        </p>
+      </div>
+      <div class="process-steps">
+        <div class="process-step">
+          <span class="step-num">01</span>
+          <p class="step-title">Discover</p>
+          <p class="step-desc">
+            A deep audit of your current workflows, tech stack, and pain points.
+            We map every manual process and identify the highest-leverage automation opportunities.
+          </p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">02</span>
+          <p class="step-title">Design</p>
+          <p class="step-desc">
+            I design a tailored automation architecture — selecting tools, mapping
+            data flows, and defining triggers, conditions, and outcomes before
+            writing a single workflow.
+          </p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">03</span>
+          <p class="step-title">Build</p>
+          <p class="step-desc">
+            Full build and integration of every system component. Tested in isolation,
+            then end-to-end against real data — with edge cases handled before launch.
+          </p>
+        </div>
+        <div class="process-step">
+          <span class="step-num">04</span>
+          <p class="step-title">Launch &amp; Optimise</p>
+          <p class="step-desc">
+            Live deployment, monitoring, and a structured handover. Post-launch
+            support to tune performance and expand the system as your needs grow.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="cta">
+    <div class="container">
+      <p class="cta-eyebrow">Ready to automate?</p>
+      <h2 class="cta-title">Let's build something<br><em>that runs itself.</em></h2>
+      <p class="cta-sub">Book a free strategy call and get a custom automation roadmap for your business.</p>
+      <a href="mailto:hello@arik.io" class="cta-btn">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#hero" class="footer-logo">arik.</a>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="mailto:hello@arik.io">Contact</a></li>
+      </ul>
+      <p class="footer-copy">&copy; 2026 Arik. All rights reserved.</p>
+    </div>
+  </footer>
 
 </body>
 </html>
