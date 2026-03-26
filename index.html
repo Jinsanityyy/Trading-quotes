@@ -140,11 +140,13 @@
       align-items: center;
       text-align: center;
       background: #0d0c0b;
-      padding-bottom: 100px;
+      padding: 0 0 100px 0;
+      overflow-x: hidden;
     }
 
     .hero-portrait {
-      width: 100%;
+      width: 100vw;
+      max-width: none;
       height: 82vh;
       object-fit: cover;
       object-position: center 15%;
@@ -154,7 +156,8 @@
     }
 
     .hero-portrait-placeholder {
-      width: 100%;
+      width: 100vw;
+      max-width: none;
       height: 82vh;
       background: #111;
       display: flex;
@@ -684,8 +687,8 @@
       nav { padding: 20px 24px; }
       section { padding: 90px 24px; }
       .clients-bar { padding: 40px 24px; }
-      #hero { padding-bottom: 80px; }
-      .hero-portrait { height: 70vh; }
+      #hero { padding: 0 0 80px 0; }
+      .hero-portrait, .hero-portrait-placeholder { height: 70vh; }
       .services-grid { grid-template-columns: 1fr; }
       .work-grid { grid-template-columns: 1fr; }
       .work-card-full { grid-column: unset; }
