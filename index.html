@@ -139,18 +139,15 @@
       padding: 0;
     }
 
-    /* portrait — full width, heavy treatment to kill studio background */
+    /* portrait */
     .hero-image {
       display: block;
       width: 100%;
       height: 56svh;
       object-fit: cover;
-      object-position: center 6%;
+      object-position: center 15%;
       margin-top: 60px;
       margin-bottom: -100px;
-      /* heavy desaturate + darken — red studio background becomes near-black */
-      filter: grayscale(90%) brightness(0.62) contrast(1.28);
-      /* bottom fade — compact zone so headline sits tight below */
       mask-image: linear-gradient(
         to bottom,
         black 55%,
@@ -707,7 +704,7 @@
   <section id="hero">
 
     <img
-      src="https://i.ibb.co/1YGbKYrm/1000005258.png"
+      src="https://i.ibb.co/8LzKXcZP/In-Shot-20260326-123827921.jpg"
       alt="Kim portrait"
       class="hero-image"
     />
