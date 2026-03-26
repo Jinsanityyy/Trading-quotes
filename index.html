@@ -153,15 +153,23 @@
       object-position: top center;
       display: block;
       margin: 0 auto 40px;
-      filter: grayscale(100%) contrast(1.06) brightness(0.91);
-      -webkit-mask-image:
-        linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, black 3%, black 63%, transparent 100%);
-      -webkit-mask-composite: destination-in;
-      mask-image:
-        linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, black 3%, black 63%, transparent 100%);
-      mask-composite: intersect;
+      filter: grayscale(100%) contrast(1.07) brightness(0.9);
+      -webkit-mask-image: radial-gradient(
+        ellipse 58% 62% at 50% 26%,
+        black 22%,
+        rgba(0,0,0,0.92) 38%,
+        rgba(0,0,0,0.55) 54%,
+        rgba(0,0,0,0.15) 66%,
+        transparent 76%
+      );
+      mask-image: radial-gradient(
+        ellipse 58% 62% at 50% 26%,
+        black 22%,
+        rgba(0,0,0,0.92) 38%,
+        rgba(0,0,0,0.55) 54%,
+        rgba(0,0,0,0.15) 66%,
+        transparent 76%
+      );
     }
 
     /* portrait placeholder (shown when no image) */
