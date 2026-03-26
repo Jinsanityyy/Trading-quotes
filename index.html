@@ -860,6 +860,54 @@
       .clients-inner { gap: 28px; }
       .clients-logos { gap: 28px; }
     }
+
+    /* ── CUSTOM CURSOR ── */
+    .has-custom-cursor * { cursor: none !important; }
+
+    .cursor-dot,
+    .cursor-circle {
+      position: fixed;
+      top: 0; left: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      z-index: 99999;
+      will-change: left, top;
+    }
+
+    .cursor-dot {
+      width: 7px;
+      height: 7px;
+      background: var(--cream);
+      transition: opacity 0.25s, background 0.25s;
+    }
+
+    .cursor-circle {
+      width: 26px;
+      height: 26px;
+      border: 1px solid rgba(221, 213, 192, 0.38);
+      background: transparent;
+      transition: opacity 0.25s,
+                  width  0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                  height 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.35s;
+    }
+
+    .cursor-dot.is-visible   { opacity: 1; }
+    .cursor-circle.is-visible { opacity: 1; }
+
+    /* hover state: circle expands, brightens */
+    .cursor-circle.is-hovered {
+      width: 42px;
+      height: 42px;
+      border-color: rgba(221, 213, 192, 0.62);
+    }
+
+    /* dot dims slightly on hover so circle reads cleaner */
+    .cursor-dot.is-hovered {
+      background: rgba(221, 213, 192, 0.7);
+    }
   </style>
 </head>
 <body>
@@ -1554,6 +1602,71 @@
           io.observe(el);
         });
       });
+    })();
+
+    /* ── CUSTOM CURSOR ── */
+    (function () {
+      if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
+
+      document.documentElement.classList.add('has-custom-cursor');
+
+      var dot    = document.createElement('div');
+      var circle = document.createElement('div');
+      dot.className    = 'cursor-dot';
+      circle.className = 'cursor-circle';
+      document.body.appendChild(dot);
+      document.body.appendChild(circle);
+
+      var mx = -200, my = -200;   /* mouse — instant */
+      var cx = -200, cy = -200;   /* circle — lerped */
+      var visible  = false;
+      var hovered  = false;
+
+      function show() {
+        if (visible) return;
+        visible = true;
+        dot.classList.add('is-visible');
+        circle.classList.add('is-visible');
+      }
+      function hide() {
+        visible = false;
+        dot.classList.remove('is-visible');
+        circle.classList.remove('is-visible');
+      }
+      function setHover(on) {
+        if (hovered === on) return;
+        hovered = on;
+        dot.classList.toggle('is-hovered', on);
+        circle.classList.toggle('is-hovered', on);
+      }
+
+      document.addEventListener('mousemove', function (e) {
+        mx = e.clientX; my = e.clientY;
+        dot.style.left = mx + 'px';
+        dot.style.top  = my + 'px';
+        show();
+      });
+      document.addEventListener('mouseleave', hide);
+
+      /* hover targets */
+      var sel = 'a, button, .service-card, .work-card, .cta-btn, ' +
+                '.work-card-preview, .carousel-btn, .tool-icon-item, ' +
+                'h1, h2, h3, label, input, textarea';
+      document.querySelectorAll(sel).forEach(function (el) {
+        el.addEventListener('mouseenter', function () { setHover(true);  });
+        el.addEventListener('mouseleave', function () { setHover(false); });
+      });
+
+      /* lerp loop */
+      function lerp(a, b, t) { return a + (b - a) * t; }
+      function tick() {
+        cx = lerp(cx, mx, 0.11);
+        cy = lerp(cy, my, 0.11);
+        circle.style.left = cx + 'px';
+        circle.style.top  = cy + 'px';
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
     })();
 
     /* ── CAROUSEL ── */
