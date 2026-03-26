@@ -139,7 +139,7 @@
       padding: 0;
     }
 
-    /* portrait sits outside padded container — full screen width */
+    /* portrait — full width mobile, constrained on desktop */
     .hero-image {
       display: block;
       width: 100%;
@@ -147,20 +147,21 @@
       object-fit: cover;
       object-position: center 6%;
       margin-top: 64px;
-      filter: grayscale(22%) brightness(0.84) contrast(1.08);
-      /* bottom fade only — matches Arik's natural dissolve */
-      mask-image: linear-gradient(
-        to bottom,
-        black 40%,
-        rgba(0,0,0,0.6) 68%,
-        transparent 96%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 40%,
-        rgba(0,0,0,0.6) 68%,
-        transparent 96%
-      );
+      filter: grayscale(28%) brightness(0.80) contrast(1.12) saturate(0.4);
+      /*
+        Two-layer mask:
+        1. radial — kills the red sides, keeps subject visible
+        2. linear — fades bottom into page background
+        intersect = pixel visible only where BOTH masks are opaque
+      */
+      -webkit-mask-image:
+        radial-gradient(ellipse 80% 88% at 50% 38%, black 42%, transparent 82%),
+        linear-gradient(to bottom, black 38%, rgba(0,0,0,0.5) 68%, transparent 95%);
+      -webkit-mask-composite: source-in;
+      mask-image:
+        radial-gradient(ellipse 80% 88% at 50% 38%, black 42%, transparent 82%),
+        linear-gradient(to bottom, black 38%, rgba(0,0,0,0.5) 68%, transparent 95%);
+      mask-composite: intersect;
     }
 
     /* text content — centered, padded */
@@ -244,10 +245,14 @@
     }
 
     @media (min-width: 768px) {
-      .hero-shell { max-width: 600px; padding-top: 100px; }
-      .hero-image { width: 340px; margin-bottom: 56px; }
-      .hero-heading { font-size: 4.8rem; }
-      .hero-text { max-width: 360px; }
+      .hero-image {
+        width: 420px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-shell { max-width: 600px; padding-top: 48px; }
+      .hero-heading { font-size: clamp(3rem, 5vw, 4.4rem); }
+      .hero-text { max-width: 400px; }
     }
 
     /* tools bar */
