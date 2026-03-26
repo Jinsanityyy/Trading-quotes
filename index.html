@@ -139,29 +139,29 @@
       padding: 0;
     }
 
-    /* portrait — full width mobile, constrained on desktop */
+    /* portrait — full width, heavy treatment to kill studio background */
     .hero-image {
       display: block;
       width: 100%;
       aspect-ratio: 4 / 5;
       object-fit: cover;
       object-position: center 6%;
-      margin-top: 64px;
-      filter: grayscale(28%) brightness(0.80) contrast(1.12) saturate(0.4);
-      /*
-        Two-layer mask:
-        1. radial — kills the red sides, keeps subject visible
-        2. linear — fades bottom into page background
-        intersect = pixel visible only where BOTH masks are opaque
-      */
-      -webkit-mask-image:
-        radial-gradient(ellipse 80% 88% at 50% 38%, black 42%, transparent 82%),
-        linear-gradient(to bottom, black 38%, rgba(0,0,0,0.5) 68%, transparent 95%);
-      -webkit-mask-composite: source-in;
-      mask-image:
-        radial-gradient(ellipse 80% 88% at 50% 38%, black 42%, transparent 82%),
-        linear-gradient(to bottom, black 38%, rgba(0,0,0,0.5) 68%, transparent 95%);
-      mask-composite: intersect;
+      margin-top: 60px;
+      /* heavy desaturate + darken — red studio background becomes near-black */
+      filter: grayscale(90%) brightness(0.62) contrast(1.28);
+      /* bottom fade only — clean dissolve into page */
+      mask-image: linear-gradient(
+        to bottom,
+        black 48%,
+        rgba(0,0,0,0.55) 70%,
+        transparent 94%
+      );
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 48%,
+        rgba(0,0,0,0.55) 70%,
+        transparent 94%
+      );
     }
 
     /* text content — centered, padded */
@@ -169,7 +169,7 @@
       width: 100%;
       max-width: 520px;
       margin: 0 auto;
-      padding: 32px 28px 60px;
+      padding: 20px 28px 60px;
       text-align: center;
     }
 
@@ -177,9 +177,9 @@
 
     .hero-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 8.5vw, 4rem);
+      font-size: clamp(1.85rem, 6.8vw, 3.8rem);
       font-weight: 400;
-      line-height: 1.1;
+      line-height: 1.12;
       letter-spacing: 0.005em;
       color: #f5f0e8;
       margin: 0 0 18px;
