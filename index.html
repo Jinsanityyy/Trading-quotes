@@ -147,20 +147,21 @@
       object-fit: cover;
       object-position: center 6%;
       margin-top: 60px;
+      margin-bottom: -18%;
       /* heavy desaturate + darken — red studio background becomes near-black */
       filter: grayscale(90%) brightness(0.62) contrast(1.28);
-      /* bottom fade only — clean dissolve into page */
+      /* bottom fade — starts later, ends at 88% so headline sits close */
       mask-image: linear-gradient(
         to bottom,
-        black 48%,
-        rgba(0,0,0,0.55) 70%,
-        transparent 94%
+        black 52%,
+        rgba(0,0,0,0.5) 72%,
+        transparent 90%
       );
       -webkit-mask-image: linear-gradient(
         to bottom,
-        black 48%,
-        rgba(0,0,0,0.55) 70%,
-        transparent 94%
+        black 52%,
+        rgba(0,0,0,0.5) 72%,
+        transparent 90%
       );
     }
 
@@ -177,9 +178,9 @@
 
     .hero-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.85rem, 6.8vw, 3.8rem);
+      font-size: clamp(1.6rem, 5.8vw, 3.6rem);
       font-weight: 400;
-      line-height: 1.12;
+      line-height: 1.14;
       letter-spacing: 0.005em;
       color: #f5f0e8;
       margin: 0 0 18px;
