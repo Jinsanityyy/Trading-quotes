@@ -143,25 +143,25 @@
     .hero-image {
       display: block;
       width: 100%;
-      aspect-ratio: 4 / 5;
+      height: 56svh;
       object-fit: cover;
       object-position: center 6%;
       margin-top: 60px;
-      margin-bottom: -18%;
+      margin-bottom: -100px;
       /* heavy desaturate + darken — red studio background becomes near-black */
       filter: grayscale(90%) brightness(0.62) contrast(1.28);
-      /* bottom fade — starts later, ends at 88% so headline sits close */
+      /* bottom fade — compact zone so headline sits tight below */
       mask-image: linear-gradient(
         to bottom,
-        black 52%,
-        rgba(0,0,0,0.5) 72%,
-        transparent 90%
+        black 55%,
+        rgba(0,0,0,0.45) 75%,
+        transparent 92%
       );
       -webkit-mask-image: linear-gradient(
         to bottom,
-        black 52%,
-        rgba(0,0,0,0.5) 72%,
-        transparent 90%
+        black 55%,
+        rgba(0,0,0,0.45) 75%,
+        transparent 92%
       );
     }
 
@@ -178,7 +178,7 @@
 
     .hero-heading {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 5.8vw, 3.6rem);
+      font-size: clamp(1.1rem, 5.8vw, 3.6rem);
       font-weight: 400;
       line-height: 1.14;
       letter-spacing: 0.005em;
