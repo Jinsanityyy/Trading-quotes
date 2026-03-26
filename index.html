@@ -11,23 +11,47 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* ── ANIMATIONS ── */
+
+    /* Expo-out — the "expensive" easing */
+    --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+
     .animate {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(30px);
+      transition: opacity 0.88s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.88s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .animate.show {
       opacity: 1;
       transform: translateY(0);
     }
 
+    /* Section labels: drift in from left */
+    .animate-label {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .animate-label.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Predictable stagger utilities */
+    .stagger-1 { transition-delay: 0.12s !important; }
+    .stagger-2 { transition-delay: 0.24s !important; }
+    .stagger-3 { transition-delay: 0.36s !important; }
+    .stagger-4 { transition-delay: 0.48s !important; }
+    .stagger-5 { transition-delay: 0.60s !important; }
+    .stagger-6 { transition-delay: 0.72s !important; }
+
     /* hero animates on load, not scroll */
     .hero-animate {
       opacity: 0;
-      transform: translateY(18px);
-      transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
-                  transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(22px);
+      transition: opacity 0.92s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.92s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .hero-animate.show {
       opacity: 1;
@@ -330,13 +354,15 @@
       padding: 48px 40px;
       border: 1px solid var(--border);
       position: relative;
-      transition: background 0.3s, transform 0.35s cubic-bezier(0.22,1,0.36,1), border-color 0.3s;
+      transition: background 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.4s;
     }
 
     .service-card:hover {
-      background: #1a1a1a;
+      background: #191919;
       transform: translateY(-4px);
-      border-color: rgba(220, 210, 190, 0.22);
+      border-color: rgba(220, 210, 190, 0.2);
     }
 
     .service-num {
@@ -372,7 +398,7 @@
 
     .work-track {
       display: flex;
-      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .work-card {
@@ -415,12 +441,13 @@
       border: 1px solid var(--border);
       margin-bottom: 36px;
       display: block;
-      opacity: 0.75;
-      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), opacity 0.3s;
+      opacity: 0.72;
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .work-card-preview:hover {
-      transform: scale(1.02);
-      opacity: 0.9;
+      transform: scale(1.018);
+      opacity: 0.88;
     }
 
     .work-stat {
@@ -752,16 +779,15 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       padding: 20px 52px;
-      transition: background 0.3s, color 0.3s, transform 0.3s, filter 0.3s;
+      transition: background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 0.45s;
     }
-    .cta-btn:hover {
-      transform: scale(1.03);
-      filter: brightness(1.12);
-    }
-
     .cta-btn:hover {
       background: var(--cream);
       color: var(--bg);
+      transform: translateY(-2px);
     }
 
     /* ── FOOTER ── */
@@ -866,16 +892,16 @@
 
     <div class="hero-shell">
       <div class="hero-copy">
-        <h1 class="hero-heading hero-animate" style="transition-delay:0.12s">
+        <h1 class="hero-heading hero-animate" style="transition-delay:0.18s">
           Automation Engineer
           <em>&amp; Systems Builder</em>
         </h1>
 
-        <p class="hero-text hero-animate" style="transition-delay:0.22s">
+        <p class="hero-text hero-animate" style="transition-delay:0.34s">
           I design and build automation systems that capture leads, handle follow-ups, and streamline operations — so your business runs without manual work.
         </p>
 
-        <a href="#cta" class="hero-link hero-animate" style="transition-delay:0.32s">
+        <a href="#cta" class="hero-link hero-animate" style="transition-delay:0.50s">
           <span class="hero-link-icon">
             <svg viewBox="0 0 24 24">
               <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -951,7 +977,7 @@
   <!-- SERVICES -->
   <section id="services">
     <div class="container">
-      <p class="section-label">What I do</p>
+      <p class="section-label animate-label">What I do</p>
       <div class="services-grid">
 
         <div class="service-card animate">
@@ -1021,7 +1047,7 @@
   <!-- WORK -->
   <section id="work">
     <div class="container">
-      <p class="section-label">Selected work</p>
+      <p class="section-label animate-label">Selected work</p>
       <div class="work-carousel">
         <div class="work-track" id="workTrack">
 
@@ -1236,7 +1262,7 @@
   <!-- TOOLS -->
   <section id="tools">
     <div class="container">
-      <p class="section-label">Stack &amp; tools</p>
+      <p class="section-label animate-label">Stack &amp; tools</p>
       <div class="tools-intro">
         <h2>The right tool<br><em style="font-family:'Playfair Display',serif; font-style:italic;">for every system.</em></h2>
         <p>
@@ -1411,7 +1437,7 @@
   <!-- PROCESS -->
   <section id="process">
     <div class="container">
-      <p class="section-label">How it works</p>
+      <p class="section-label animate-label">How it works</p>
       <div class="process-header">
         <h2>A clear process.<br><em style="font-family:'Playfair Display',serif; font-style:italic;">No surprises.</em></h2>
         <p>
@@ -1462,9 +1488,9 @@
   <section id="cta">
     <div class="container">
       <p class="cta-eyebrow animate">Ready to automate?</p>
-      <h2 class="cta-title animate" style="transition-delay:0.1s">Let's build something<br><em>that runs itself.</em></h2>
-      <p class="cta-sub animate" style="transition-delay:0.2s">Book a free strategy call and get a custom automation roadmap for your business.</p>
-      <a href="mailto:hello@kim.io" class="cta-btn animate" style="transition-delay:0.3s">Get in touch</a>
+      <h2 class="cta-title animate stagger-1">Let's build something<br><em>that runs itself.</em></h2>
+      <p class="cta-sub animate stagger-2">Book a free strategy call and get a custom automation roadmap for your business.</p>
+      <a href="mailto:hello@kim.io" class="cta-btn animate stagger-3">Get in touch</a>
     </div>
   </section>
 
@@ -1483,11 +1509,13 @@
   </footer>
 
   <script>
-    /* ── HERO: animate on load ── */
+    /* ── HERO: staggered load sequence ── */
     window.addEventListener('load', function () {
-      document.querySelectorAll('.hero-animate').forEach(function (el, i) {
-        setTimeout(function () { el.classList.add('show'); }, 80 + i * 0);
-      });
+      var heroEls = document.querySelectorAll('.hero-animate');
+      /* Small base delay so page paint settles, then CSS transition-delay handles stagger */
+      setTimeout(function () {
+        heroEls.forEach(function (el) { el.classList.add('show'); });
+      }, 60);
     });
 
     /* ── SCROLL: Intersection Observer ── */
@@ -1499,9 +1527,17 @@
             io.unobserve(entry.target);
           }
         });
-      }, { threshold: 0.12 });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -48px 0px'
+      });
 
-      /* stagger siblings inside the same parent */
+      /* section labels observed individually */
+      document.querySelectorAll('.animate-label').forEach(function (el) {
+        io.observe(el);
+      });
+
+      /* stagger siblings — skip elements that already have a stagger class */
       var groups = {};
       document.querySelectorAll('.animate').forEach(function (el) {
         var key = el.parentElement;
@@ -1510,7 +1546,11 @@
       });
       Object.values(groups).forEach(function (siblings) {
         siblings.forEach(function (el, i) {
-          el.style.transitionDelay = (el.style.transitionDelay || (i * 0.09 + 's'));
+          /* honour explicit .stagger-* classes; otherwise auto-stagger */
+          var hasStagger = /stagger-\d/.test(el.className);
+          if (!hasStagger) {
+            el.style.transitionDelay = (i * 0.13) + 's';
+          }
           io.observe(el);
         });
       });
