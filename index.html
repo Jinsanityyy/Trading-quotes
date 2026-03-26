@@ -140,36 +140,34 @@
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      padding: 70px 40px 100px;
+      padding: 52px 0 100px;
       text-align: center;
       position: relative;
     }
 
     .hero-portrait {
       width: 100%;
-      max-width: 760px;
+      max-width: 840px;
       aspect-ratio: 3 / 4;
       object-fit: cover;
       object-position: top center;
       display: block;
       margin: 0 auto 40px;
-      filter: grayscale(100%) contrast(1.06) brightness(0.92);
-      -webkit-mask-image: linear-gradient(to bottom,
-        transparent 0%,
-        black 4%,
-        black 62%,
-        transparent 100%);
-      mask-image: linear-gradient(to bottom,
-        transparent 0%,
-        black 4%,
-        black 62%,
-        transparent 100%);
+      filter: grayscale(100%) contrast(1.06) brightness(0.91);
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 3%, black 63%, transparent 100%);
+      -webkit-mask-composite: destination-in;
+      mask-image:
+        linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 3%, black 63%, transparent 100%);
+      mask-composite: intersect;
     }
 
     /* portrait placeholder (shown when no image) */
     .hero-portrait-placeholder {
       width: 100%;
-      max-width: 760px;
+      max-width: 840px;
       aspect-ratio: 3 / 4;
       margin: 0 auto 40px;
       background: #1a1a1a;
@@ -182,7 +180,11 @@
       text-transform: uppercase;
     }
 
-    .hero-content { max-width: 720px; }
+    .hero-content {
+      max-width: 720px;
+      width: 100%;
+      padding: 0 40px;
+    }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
@@ -695,7 +697,8 @@
       nav { padding: 20px 24px; }
       section { padding: 90px 24px; }
       .clients-bar { padding: 40px 24px; }
-      #hero { padding: 72px 24px 80px; }
+      #hero { padding: 50px 0 80px; }
+      .hero-content { padding: 0 24px; }
       .services-grid { grid-template-columns: 1fr; }
       .work-grid { grid-template-columns: 1fr; }
       .work-card-full { grid-column: unset; }
@@ -710,7 +713,7 @@
     }
 
     @media (max-width: 560px) {
-      .hero-portrait, .hero-portrait-placeholder { max-width: min(94vw, 480px); aspect-ratio: 3 / 4; }
+      .hero-portrait, .hero-portrait-placeholder { width: 92vw; max-width: 92vw; }
       .tools-categories { grid-template-columns: 1fr; }
       .process-steps { grid-template-columns: 1fr; }
       .process-step { border-right: none; }
