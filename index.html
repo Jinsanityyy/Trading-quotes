@@ -143,8 +143,19 @@
       padding: 0;
     }
 
-    /* no overlay — image carries all mood via filter + mask */
-    #hero::after { display: none; }
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        rgba(12,12,12,0.55) 0%,
+        rgba(12,12,12,0.25) 35%,
+        rgba(12,12,12,0.0) 65%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
 
     .hero-portrait {
       position: absolute;
@@ -152,25 +163,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: 62% 10%;
-      display: block;
-      /* image is the darkness source — not any overlay */
-      filter: grayscale(38%) saturate(0.45) brightness(0.64) contrast(1.18);
-      /* radial mask: face stays visible, all edges dissolve into page #0c0c0c */
-      -webkit-mask-image: radial-gradient(
-        ellipse 72% 80% at 62% 28%,
-        black 22%,
-        rgba(0,0,0,0.85) 45%,
-        rgba(0,0,0,0.4) 68%,
-        transparent 90%
-      );
-      mask-image: radial-gradient(
-        ellipse 72% 80% at 62% 28%,
-        black 22%,
-        rgba(0,0,0,0.85) 45%,
-        rgba(0,0,0,0.4) 68%,
-        transparent 90%
-      );
+      object-position: 70% center;
+      filter: grayscale(35%) brightness(0.75) contrast(1.15);
     }
 
     .hero-portrait-placeholder {
