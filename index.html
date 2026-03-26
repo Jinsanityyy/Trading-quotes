@@ -487,6 +487,28 @@
       padding: 4px 10px;
     }
 
+    .work-results {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .work-result {
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--cream-dim);
+      background: rgba(221, 213, 192, 0.04);
+      border: 1px solid rgba(221, 213, 192, 0.1);
+      border-radius: 4px;
+      padding: 6px 12px;
+      flex: 1;
+      min-width: 100px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
     .carousel-nav {
       display: flex;
       align-items: center;
@@ -997,7 +1019,7 @@
 
           <!-- 1: Healthcare -->
           <div class="work-card">
-            <p class="work-card-tag">Healthcare Automation · n8n</p>
+            <p class="work-card-tag">Healthcare Automation</p>
             <h3 class="work-card-title">US Healthcare Clinic Intake, Scheduling & Triage Automation</h3>
             <p class="work-card-desc">A complex n8n workflow automating patient intake, validation, deduplication checks, urgency scoring, insurance verification routing, appointment creation, and automated notifications for healthcare staff.</p>
             <div class="work-badges">
@@ -1013,20 +1035,18 @@
               <li>Insurance verification routing</li>
             </ul>
             <img src="https://i.ibb.co/k6v2j4tT/healthcare-workflow-Fnox-ZOe-Q.webp" alt="US Healthcare Clinic Automation workflow" class="work-card-preview" />
-            <div class="work-stat">6-step</div>
-            <p class="work-stat-label">Fully automated patient triage pipeline</p>
             <div class="work-tools">
-              <span class="work-tool">n8n</span>
+              <span class="work-tool">N8N</span>
               <span class="work-tool">Airtable</span>
               <span class="work-tool">Webhooks</span>
-              <span class="work-tool">JavaScript</span>
               <span class="work-tool">Gmail</span>
+              <span class="work-tool">JavaScript</span>
             </div>
           </div>
 
           <!-- 2: AI Sales Email -->
           <div class="work-card">
-            <p class="work-card-tag">AI Sales Automation · n8n</p>
+            <p class="work-card-tag">AI Sales Automation</p>
             <h3 class="work-card-title">AI Sales Email Intake & CRM Automation System</h3>
             <p class="work-card-desc">Uses AI to process incoming emails, detect quote requests, extract lead data, create CRM records, assign tasks to the sales team, and automatically send follow-up reminders — saving sales teams 1–2 hours per day.</p>
             <div class="work-badges">
@@ -1042,20 +1062,23 @@
               <li>24hr smart follow-up automation</li>
             </ul>
             <img src="https://i.ibb.co/kgDVTkd0/sales-email-workflow-DHI6-WJCJ.webp" alt="AI sales email intake workflow" class="work-card-preview" />
-            <div class="work-stat">2 hrs</div>
-            <p class="work-stat-label">Saved per sales rep per day</p>
             <div class="work-tools">
-              <span class="work-tool">n8n</span>
+              <span class="work-tool">N8N</span>
               <span class="work-tool">OpenAI</span>
               <span class="work-tool">Gmail API</span>
               <span class="work-tool">Airtable</span>
               <span class="work-tool">Asana</span>
             </div>
+            <div class="work-results">
+              <span class="work-result">AI email classification</span>
+              <span class="work-result">Automatic CRM &amp; task creation</span>
+              <span class="work-result">Smart 24hr follow-up</span>
+            </div>
           </div>
 
           <!-- 3: Lead Intake CRM -->
           <div class="work-card">
-            <p class="work-card-tag">CRM Automation · n8n</p>
+            <p class="work-card-tag">CRM Automation</p>
             <h3 class="work-card-title">Lead Intake & CRM Update Automation</h3>
             <p class="work-card-desc">An n8n workflow that captures incoming lead data through a webhook, processes and structures the information using JavaScript, creates and updates CRM records in Airtable, and automatically sends notification emails.</p>
             <div class="work-badges">
@@ -1071,20 +1094,23 @@
               <li>Structured data formatting</li>
             </ul>
             <img src="https://i.ibb.co/W4BPMFX4/lead-workflow-CSv-Yoh-K2.webp" alt="Lead intake CRM workflow" class="work-card-preview" />
-            <div class="work-stat">0</div>
-            <p class="work-stat-label">Manual data entry required</p>
             <div class="work-tools">
-              <span class="work-tool">n8n</span>
+              <span class="work-tool">N8N</span>
               <span class="work-tool">Airtable</span>
               <span class="work-tool">Webhooks</span>
               <span class="work-tool">JavaScript</span>
               <span class="work-tool">Gmail</span>
             </div>
+            <div class="work-results">
+              <span class="work-result">Automated lead capture</span>
+              <span class="work-result">Structured CRM updates</span>
+              <span class="work-result">Faster response time</span>
+            </div>
           </div>
 
           <!-- 4: Zapier Content -->
           <div class="work-card">
-            <p class="work-card-tag">AI Workflow · Zapier</p>
+            <p class="work-card-tag">AI Workflow</p>
             <h3 class="work-card-title">AI Content Repurposing Automation (Zapier + AI)</h3>
             <p class="work-card-desc">A multi-step automation that transforms a single audio/video file into blog posts and social media content using AI. Includes transcription, content generation, looping logic, and conditional paths for scalable distribution.</p>
             <div class="work-badges">
@@ -1100,8 +1126,6 @@
               <li>Looping logic for multiple outputs</li>
             </ul>
             <img src="https://i.ibb.co/qL4hYG8Y/content-repurposing-workflow-xlf48-Bex.png" alt="Zapier content repurposing workflow" class="work-card-preview" />
-            <div class="work-stat">5×</div>
-            <p class="work-stat-label">Content pieces from a single input</p>
             <div class="work-tools">
               <span class="work-tool">Zapier</span>
               <span class="work-tool">OpenAI (ChatGPT)</span>
@@ -1109,11 +1133,16 @@
               <span class="work-tool">Facebook Pages</span>
               <span class="work-tool">LinkedIn</span>
             </div>
+            <div class="work-results">
+              <span class="work-result">Faster content production</span>
+              <span class="work-result">Reduced manual work</span>
+              <span class="work-result">Scalable content system</span>
+            </div>
           </div>
 
           <!-- 5: Zapier Lead Notification -->
           <div class="work-card">
-            <p class="work-card-tag">AI Lead Scoring · Zapier</p>
+            <p class="work-card-tag">AI Lead Scoring</p>
             <h3 class="work-card-title">Lead Notification Automation (Zapier + AI)</h3>
             <p class="work-card-desc">A lead intake and notification system using Typeform, Zapier, ChatGPT, and Slack. Captures incoming leads, generates an AI-powered summary with priority classification (Hot, Warm, Cold), and sends clean Slack notifications.</p>
             <div class="work-badges">
@@ -1129,8 +1158,6 @@
               <li>End-to-end workflow automation</li>
             </ul>
             <img src="https://i.ibb.co/Y486PyW5/zapier-lead-workflow-Dq0j-O9v.png" alt="Zapier lead notification workflow" class="work-card-preview" />
-            <div class="work-stat">&lt;2 min</div>
-            <p class="work-stat-label">Average lead alert time</p>
             <div class="work-tools">
               <span class="work-tool">Zapier</span>
               <span class="work-tool">Typeform</span>
@@ -1138,11 +1165,16 @@
               <span class="work-tool">Slack</span>
               <span class="work-tool">Webhooks</span>
             </div>
+            <div class="work-results">
+              <span class="work-result">Faster lead response</span>
+              <span class="work-result">Improved prioritization</span>
+              <span class="work-result">Reduced manual review</span>
+            </div>
           </div>
 
           <!-- 6: GHL -->
           <div class="work-card">
-            <p class="work-card-tag">Sales Automation · GHL</p>
+            <p class="work-card-tag">Sales Automation</p>
             <h3 class="work-card-title">Lead Capture, Follow-Up & Contract Automation</h3>
             <p class="work-card-desc">This workflow automates the entire lead journey from form submission to conversion. It ensures fast response times, consistent follow-ups, and seamless contract delivery without manual intervention.</p>
             <div class="work-badges">
@@ -1158,14 +1190,17 @@
               <li>Conditional branching (based on lead behavior)</li>
             </ul>
             <img src="https://i.ibb.co/pBFbbLDs/ghl-lead-workflow-C1-Hx-Eodd.webp" alt="GHL lead capture workflow" class="work-card-preview" />
-            <div class="work-stat">100%</div>
-            <p class="work-stat-label">Automated lead-to-contract flow</p>
             <div class="work-tools">
               <span class="work-tool">GHL</span>
               <span class="work-tool">Automation</span>
               <span class="work-tool">SMS</span>
               <span class="work-tool">Workflow Logic</span>
               <span class="work-tool">CRM</span>
+            </div>
+            <div class="work-results">
+              <span class="work-result">Faster response time</span>
+              <span class="work-result">Increased lead conversion</span>
+              <span class="work-result">Reduced manual workload</span>
             </div>
           </div>
 
