@@ -148,18 +148,14 @@
       object-position: center 8%;
       margin-top: 0;
       margin-bottom: -120px;
-      mask-image: linear-gradient(
-        to bottom,
-        black 65%,
-        rgba(0,0,0,0.4) 82%,
-        transparent 96%
-      );
-      -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 65%,
-        rgba(0,0,0,0.4) 82%,
-        transparent 96%
-      );
+      mask-image:
+        linear-gradient(to right,  transparent 0%, black 10%, black 90%, transparent 100%),
+        linear-gradient(to bottom, black 65%, rgba(0,0,0,0.4) 82%, transparent 96%);
+      mask-composite: intersect;
+      -webkit-mask-image:
+        linear-gradient(to right,  transparent 0%, black 10%, black 90%, transparent 100%),
+        linear-gradient(to bottom, black 65%, rgba(0,0,0,0.4) 82%, transparent 96%);
+      -webkit-mask-composite: source-in;
     }
 
     /* text content — centered, padded */
